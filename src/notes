@@ -1,0 +1,25 @@
+ταξινόμηση : ok
+καλαθι - πανω : ok
+καλαθι - σελιδα : ok
+διαστάσεις : ok
+προστεθηκε στο καλαθι : ok
+σχόλια : ok
+αγορά : ok
+header/route : ok
+creditcard
+responsive : ok
+categories
+UI
+main page
+footer : ok
+αναζήτηση
+analytics
+server : ok
+μαγιο
+comments approve : ok
+server paths (/product: etc)
+caching (with local storage) : ok
+---
+-- bugs
+firefox on select popup closes
+delete last from cart
