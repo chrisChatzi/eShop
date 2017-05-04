@@ -11,24 +11,33 @@ const Products = ( { products, tags, prodIdx, catIdx,
 	{/*options (filter sort)*/}
 		<div className="options">
 			{/*sort option*/}
-			<div id="sort" className={(state.sortShow) ? "sort on" : "sort"} onClick={sortClick}>
-				{lang.sort} <i className={(state.sortShow) ? "fa fa-chevron-up" : "fa fa-chevron-down"}></i>
+			<div id="sort" className={(state.sortShow) ? "sort headOn" : "sort"} onClick={sortClick}>
+				{lang.sort} 
+				{(state.sorted != "")
+					?  <i className="dot fa fa-circle"></i>
+					: ""
+				} <i className={(state.sortShow) ? "fa fa-chevron-up" : "fa fa-chevron-down"}></i>
 			</div>
 			<h3>{(products.length > 1) ? products.length+" "+lang.products : ""}</h3>
 			{/*filter option*/}
-			<div id="filter" className={(state.filterShow) ? "filter on" : "filter"} onClick={filterClick}>
-				{lang.filter} <i className={(state.filterShow) ? "fa fa-chevron-up" : "fa fa-chevron-down"}></i>
+
+			<div id="filter" className={(state.filterShow) ? "filter headOn" : "filter"} onClick={filterClick}>
+				{lang.filter}
+				{(state.color.length > 0 || state.size.length > 0 || state.tag.length > 0)
+					?  <i className="dot fa fa-circle"></i>
+					: ""
+				} <i className={(state.filterShow) ? "fa fa-chevron-up" : "fa fa-chevron-down"}></i>
 			</div>
 			<div id="line" className="line"></div>
 		</div>
-		{/*sort*/}
+	{/*sort*/}
 		<div className={(state.sortShow) ? "sort-view" : "sort-view hide"}>
 			<div className={(state.sorted == "asc") ? "row on" : "row"} 
 				onClick={()=>sortAction("price", "asc")}>{lang.sortAsc}</div>
 			<div className={(state.sorted == "desc") ? "row on" : "row"} 
 				onClick={()=>sortAction("price", "desc")}>{lang.sortDesc}</div>
 		</div>
-		{/*filter*/}
+	{/*filter*/}
 		<div className={(state.filterShow) ? "filter-view" : "filter-view hide"}>
 			<div className="grid">
 				<div className="title">{lang.color}</div>
@@ -196,7 +205,7 @@ const Products = ( { products, tags, prodIdx, catIdx,
 				)}
 			</div>
 		</div>
-		{/*procudt list*/}
+	{/*procudt list*/}
 		<div className="productList">
 		{(products.length > 0) ? products.map( (v, i) =>
 			(state.tagFlag[i] || state.tagFlag.length == 0) ?

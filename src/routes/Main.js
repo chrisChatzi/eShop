@@ -7,6 +7,7 @@ const Main = () => (
 	<div>
 		<Header />
 		<MainC />
+		<Footer />
 	</div>
 )
 

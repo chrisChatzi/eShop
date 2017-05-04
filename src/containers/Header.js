@@ -159,7 +159,9 @@ class Header extends Component {
 	}
 	//show cart
 	showCartHandler(flag){
-		this.props.showCart(flag);
+		if(flag){
+			if(this.props.cart.length > 0) this.props.showCart(flag);
+		}else this.props.showCart(flag);
 	}
 	//go to cart
 	onCartHandler(){

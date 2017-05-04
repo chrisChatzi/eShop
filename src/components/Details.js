@@ -13,7 +13,7 @@ const Details = ( {state, product, lang, langIdx, catIdx, prodIdx, imgIdx, dimIm
 			{/*MAIN*/}
 				<div className="main">
 				{/*image*/}
-					<div className="img">
+					<div className="img animated zoomIn">
 						<img className="imgMain" src={product.img[state.imgIdx]} onClick={()=>clickImg(true)}
 							onMouseOver={()=>hoverImg(true)} onMouseOut={()=>hoverImg(false)}/>
 					{/*image label 'click ot enlarge'*/}
@@ -36,7 +36,7 @@ const Details = ( {state, product, lang, langIdx, catIdx, prodIdx, imgIdx, dimIm
 				{/*info*/}
 					<div className="info">
 					{/*title*/}
-						<div className="row title">{product.title[langIdx].toUpperCase()}</div>
+						<div className="row title animated fadeIn">{product.title[langIdx].toUpperCase()}</div>
 					{/*price*/}
 						<div className="row price">{product.price} &euro;</div>
 					{/*description*/}

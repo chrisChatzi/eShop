@@ -93,7 +93,7 @@ class Categories extends Component {
 			line.style.width = wFilter+"px";
 		}else line.style.opacity = 0;
 	}
-
+	//helper func to get array of if filters are applied(true) per filter type
 	checkFilter(type){
 		let array = []
 		this.props.products.map( (v, i) => {
@@ -105,29 +105,31 @@ class Categories extends Component {
 		});
 		return array
 	}
-
+	//click on product
 	productClickHandler(v){
 		this.props.selectedProduct(v);
 		history.push("/product/:"+v._id)
 	}
-
+	//sort action
 	sortActionHandler(by, type){
 		this.props.sortProducts(this.props.products, by, type);
 		this.setState({sorted : type})
 	}
-
+	//show sort div
 	sortClickHandler(){
 		this.setState({
 			sortShow : !this.state.sortShow,
 			filterShow : false
 		});
 	}
+	//show filter div
 	filterClickHandler(){
 		this.setState({
 			sortShow : false,
 			filterShow : !this.state.filterShow
 		});
 	}
+	// filter color click
 	colorClickHandler(v){
 		let array = this.state.color;
 		if(array.indexOf(v) < 0) array.push(v)
@@ -135,6 +137,7 @@ class Categories extends Component {
 		this.setState({color : array});
 		this.setState({colorFlag : this.checkFilter("color")})
 	}
+	// filter size click
 	sizeClickHandler(v){
 		let array = this.state.size;
 		if(array.indexOf(v) < 0) array.push(v)
@@ -142,12 +145,13 @@ class Categories extends Component {
 		this.setState({size : array});
 		this.setState({sizeFlag : this.checkFilter("size")})
 	}
+	// filter tag click
 	tagClickHandler(v){
 		let array = this.state.tag;
 		if(array.indexOf(v) < 0) array.push(v)
 		else array.splice(array.indexOf(v), 1)
 		this.setState({tag : array});
-		this.setState({sizeFlag : this.checkFilter("tag")})
+		this.setState({tagFlag : this.checkFilter("tag")})
 	}
 
 	render() {

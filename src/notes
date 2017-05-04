@@ -19,6 +19,7 @@ server : ok
 comments approve : ok
 server paths (/product: etc)
 caching (with local storage) : ok
+add to google maps
 ---
 -- bugs
 firefox on select popup closes
