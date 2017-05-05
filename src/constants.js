@@ -9,6 +9,7 @@ const show_cart_str = "SHOW_CART"
 const delete_item_str = "DELETE_ITEM_FROM_CART"
 const change_quant_str = "CHANGE_QUANTITY"
 const clear_cart_str = "CLEAR_CART"
+const search_item_str = "SEARCH_ITEM"
 // admin
 const get_categories_str = "GET_CATEGORIES"
 const get_products_str = "GET_PRODUCTS"
@@ -50,7 +51,7 @@ const el = {
 		carousel : [
 			"Μπλούζες κοντομάνικες απο 7\u20AC",
 			"Τζιν παντελόνια απο 19\u20AC",
-			"qweqweqweqwewqe"
+			"Βερμούδες από 14\u20AC"
 		],
 	//products
 		products : "προϊόντα",
@@ -180,7 +181,7 @@ const en = {
 			["TANKTOP", "NORMAL"],
 			["JEANS", "CHINNOS", "JOGGERS", "SHORTS"]
 		],
-	// main
+	//main
 		home1 : "Really cheap",
 		homeInfo : [
 				"Delivery within 3 days with ___ courrier",
@@ -191,7 +192,7 @@ const en = {
 		carousel : [
 			"T-shirts from 7\u20AC",
 			"Jeans from 19\u20AC",
-			"rtyrtyrtyrty"
+			"Shorts from 14\u20AC"
 		],
 	//products
 		products : "products",
@@ -298,7 +299,7 @@ const en = {
 		orderInfo2 : "(If you're given one)",
 		orderTY : "Thank you",
 		orderBack : "Back to home page",
-	// footer
+	//footer
 		contact : "Contact",
 		infoFooter : ["Info","Help","Guide","Legal"],
 	//delivery
@@ -318,7 +319,7 @@ const sub =  [
 	["JEANS", "CHINNOS", "JOGGERS", "SHORTS"]
 ];
 
-export { login_str, set_lang_str, change_path_str, selected_product_str,
+export { login_str, set_lang_str, change_path_str, selected_product_str, search_item_str,
 			get_categories_str, get_products_str, rearrange_categories_str, 
 			popupCategory_status_str, popupProducts_status_str, popupComments_status_str,
 			add_category_str, msg_str, show_cart_str, delete_item_str, change_quant_str,

@@ -93,7 +93,7 @@ class Categories extends Component {
 			line.style.width = wFilter+"px";
 		}else line.style.opacity = 0;
 	}
-	//helper func to get array of if filters are applied(true) per filter type
+	//helper func to get array of filters applied(if applied) per filter type
 	checkFilter(type){
 		let array = []
 		this.props.products.map( (v, i) => {

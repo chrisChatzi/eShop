@@ -15,6 +15,7 @@ let main = {
 		name : ""
 	},
 	product : {},		//product opened in page
+	productSearch : [],	//products returned after search
 	categories : [
 		{
 			id : "tops",

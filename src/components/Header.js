@@ -6,17 +6,19 @@ import HeaderSub from './HeaderSub.js'
 
 const Header = ( { clickEvent, state, path, lang, langStr, langIdx, categories, cartItems,
 					home, clickCat, clickSub,
-					categoryIdx, productIdx,
+					categoryIdx, productIdx, productSearch, searchIds,
 					cartFlag, showCart, cart, cartSizes, cartColors, cartQuant,
 					onCart, onCheckout,
-					changeLang, showLang, showSub, changeHead } ) => (
+					changeLang, showLang, showSub, changeHead, 
+					changeSearch, loseFocus, searchClick } ) => (
 	<div className="header">
 		<div className="desktop">
 		{/*top*/}
 			<div className="headerMain">
 			{/*search*/}
 				<div className="left">
-					<input placeholder={lang.search} />
+					<input placeholder={lang.search} value={state.searchVal} 
+						onChange={changeSearch} onBlur={loseFocus} />
 					<button>
 						<i className="fa fa-search"></i>
 					</button>
@@ -39,6 +41,18 @@ const Header = ( { clickEvent, state, path, lang, langStr, langIdx, categories, 
 						</i>
 					</div>
 				</div>
+			</div>
+		{/*search results*/}
+			<div className={(productSearch.length > 0) ? "search" : "search off"}>
+				{(productSearch.length > 0) ? productSearch.map( (v,i) => 
+					<div key={i} className="row" onClick={()=>searchClick(v)}>
+						<span>{v.title[langIdx]}</span>
+						<span className="grey">
+							{" - "+lang.sub[searchIds(v.category)[0]][searchIds(v.category)[1]]+" "
+							+lang.categories[searchIds(v.category)[0]]}
+						</span>
+					</div>
+				) : ""}
 			</div>
 		{/*language div*/}
 			<HeaderLanguage state={state} langStr={langStr} showLang={showLang} changeLang={changeLang} />

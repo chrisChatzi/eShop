@@ -7,7 +7,7 @@ const Products = ( { products, tags, prodIdx, catIdx,
 					filterClick, colorClick, sizeClick, tagClick,
 					state, lang, langIdx } ) => (
 	<div id="productsBody" className="products">
-		<div className="head">{lang.sub[catIdx][prodIdx]}</div>
+		<div className="head">{lang.sub[catIdx][prodIdx]+" "+lang.categories[catIdx]}</div>
 	{/*options (filter sort)*/}
 		<div className="options">
 			{/*sort option*/}
@@ -225,7 +225,7 @@ const Products = ( { products, tags, prodIdx, catIdx,
 			: ""
 			: ""
 			: ""
-		) : <div id="result">
+		) : <div className="noProducts" id="result">
 				<i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 			</div> }
 		</div>

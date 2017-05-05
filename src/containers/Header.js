@@ -5,7 +5,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import HeaderC from '../components/Header.js'
-import { set_lang, change_path, get_products_frontend, show_cart } from '../actions.js'
+import { set_lang, change_path, get_products_frontend, show_cart, search_item, selected_product } from '../actions.js'
 import history from '../history.js'
 
 function mapStateToProps(state, ownProps) {
@@ -22,7 +22,8 @@ function mapStateToProps(state, ownProps) {
 		cartSizes : state.main.cartSizes,
 		cartColors : state.main.cartColors,
 		cartQuant : state.main.cartQuant,
-		cartFlag : state.main.showCart
+		cartFlag : state.main.showCart,
+		productSearch : state.main.productSearch
 	};
 }
 
@@ -37,7 +38,14 @@ function mapDispatchToProps(dispatch) {
 		},
 		showCart: (flag) => {
 			dispatch(show_cart(flag));
-		}
+		},
+		searchItem: (val, langIdx) => {
+			dispatch(search_item(val, langIdx))
+		},
+		selectedProduct: (v, category, product, categories) => {
+			dispatch(selected_product(v));
+			dispatch(change_path(category, product, categories))
+		},
 	};
 }
 
@@ -64,7 +72,9 @@ class Header extends Component {
 			showHead : false, 	//on mobile show categories
 			langShow : false,	//show language menu
 			subShow : false,	//show sub categories
-			anime : false
+			anime : false,
+			searchVal : "",		//search string
+			searchIdx : [0, 0]	//search category and product (sub) ids
 		}
 
 		this.home = this.homeHandler.bind(this)
@@ -78,6 +88,9 @@ class Header extends Component {
 		this.showCart = this.showCartHandler.bind(this)
 		this.onCart = this.onCartHandler.bind(this)
 		this.onCheckout = this.onCheckoutHandler.bind(this)
+		this.changeSearch = this.changeSearchHandler.bind(this)
+		this.loseFocus = this.loseFocusHandler.bind(this)
+		this.searchClick = this.searchClickHandler.bind(this)
 	}
 
 	componentDidMount() {
@@ -89,7 +102,6 @@ class Header extends Component {
 		let path = location.pathname;
 		const unlisten = history.listen((location, action) => {
 			if(action == "POP"){
-				
 				if(path == "/") path = ""
 				// if(path.indexOf("categories") >= 0){
 				// 	path = path.substring(path.lastIndexOf(":")+1, path.length);
@@ -114,6 +126,27 @@ class Header extends Component {
 
 	clickEventHandler() {
 		
+	}
+	//get category product id
+	searchIds(val){
+		let array = [0,0]
+		switch(val){
+			case "0": array = [0,0,"tops","short"]; break;
+			case "1": array = [0,1,"tops","long"]; break;
+			case "2": array = [0,2,"tops","knitwear"]; break;
+			case "3": array = [0,3,"tops","tanktop"]; break;
+			case "4": array = [1,0,"cardigans","knitwear"]; break;
+			case "5": array = [1,1,"cardigans","hoodies"]; break;
+			case "6": array = [2,0,"shirts","short"]; break;
+			case "7": array = [2,1,"shirts","long"]; break;
+			case "8": array = [3,0,"jackets","tanktop"]; break;
+			case "9": array = [3,1,"jackets","normal"]; break;
+			case "10": array = [4,0,"trousers","jeans"]; break;
+			case "11": array = [4,1,"trousers","chinos"]; break;
+			case "12": array = [4,2,"trousers","joggers"]; break;
+			case "13": array = [4,2,"trousers","shorts"]; break;
+		}
+		return array
 	}
 	//show/hide sub categories
 	showSubHandler(flag, type) {
@@ -176,24 +209,44 @@ class Header extends Component {
 		this.props.change_path(0, 0, this.props.categories);
 		history.push("/checkout");
 	}
+	//search
+	changeSearchHandler(e){
+		let val = e.target.value;
+		this.setState({searchVal : val});
+		this.props.searchItem(val, this.props.langIdx);
+	}
+	//loseFocusHandler
+	loseFocusHandler(){
+		this.setState({searchVal : ""});
+		this.props.searchItem("", this.props.langIdx);
+	}
+	//click search item
+	searchClickHandler(v){
+		this.props.selectedProduct(v, 
+			this.searchIds(v.category)[2], this.searchIds(v.category)[3], this.props.categories);
+		history.push("/product/:"+v._id)
+	}
 
 	render() {
 		let { lang, langIdx, langStr, path, 
 				cartItems, cart, cartFlag, cartSizes, cartColors, cartQuant,
-				categories, categoryIdx, productIdx } = this.props;
+				categories, categoryIdx, productIdx, productSearch } = this.props;
 		let { home, clickEvent, changeLang, showLang, showSub, changeHead,
-				clickCat, clickSub, showCart, onCart, onCheckout } = this
+				clickCat, clickSub, showCart, onCart, onCheckout, 
+				changeSearch, loseFocus, searchClick } = this
 
 		return (
 			<div className="">
 				<HeaderC state={this.state} home={home}
 					categoryIdx={categoryIdx} productIdx={productIdx}
-					clickEvent={clickEvent}  cartItems={cartItems}
+					clickEvent={clickEvent}  cartItems={cartItems} 
+					productSearch={productSearch} searchIds={this.searchIds}
 					path={path} lang={lang} langIdx={langIdx} langStr={langStr} categories={categories}
 					clickSub={clickSub} clickCat={clickCat} changeHead={changeHead}
 					cart={cart} showCart={showCart} cartFlag={cartFlag} 
 					cartSizes={cartSizes} cartColors={cartColors} cartQuant={cartQuant}
 					onCart={onCart} onCheckout={onCheckout}
+					changeSearch={changeSearch} loseFocus={loseFocus} searchClick={searchClick}
 					changeLang={changeLang} showLang={showLang} showSub={showSub} />
 			</div>
 		)

@@ -1,6 +1,6 @@
 import init from '../initialState'
 import { el, en, login_str, set_lang_str, change_path_str, sort_products_str, delete_item_str,
-	change_quant_str, clear_cart_str,
+	change_quant_str, clear_cart_str, search_item_str,
 		get_products_frontend_str, selected_product_str, update_cart_str, show_cart_str
 } from '../constants.js'
 import history from '../history.js'
@@ -8,14 +8,17 @@ import history from '../history.js'
 const state_update = (state = init.main, action) => {
 	let newstate = Object.assign({}, state);
 	switch (action.type) {
+		//login (not there)
 		case login_str: {
 			newstate.login = action.res.flag
 			return newstate
 		}
+		//show cart on hover
 		case show_cart_str: {
 			newstate.showCart = action.flag
 			return newstate
 		}
+		//set language
 		case set_lang_str: {
 			let lang;
 			let langIdx;
@@ -38,6 +41,7 @@ const state_update = (state = init.main, action) => {
 			newstate.lang = lang;
 			return newstate
 		}
+		//change path
 		case change_path_str: {
 			let sub = [];
 			let name = "";
@@ -66,20 +70,29 @@ const state_update = (state = init.main, action) => {
 			newstate.selectedProduct.name = name
 			return newstate
 		}
+		//get products
 		case get_products_frontend_str: {
 			newstate.products = action.products;
 			newstate.tags = action.tags;
 			return newstate
 		}
+		//select one product
 		case selected_product_str: {
 			newstate.product = action.product;
 			return newstate
 		}
+		//sort
 		case sort_products_str: {
 			let array = action.products.slice(0,action.products.length)
 			newstate.products = array;
 			return newstate
 		}
+		//search
+		case search_item_str: {
+			newstate.productSearch = action.products;
+			return newstate
+		}
+		//update cart
 		case update_cart_str: {
 			let array = newstate.cart.slice()
 			let sizes = newstate.cartSizes.slice()
@@ -104,6 +117,7 @@ const state_update = (state = init.main, action) => {
 			newstate.cartItems = c;
 			return newstate
 		}
+		//delete item from cart
 		case delete_item_str: {
 			let array = newstate.cart.slice()
 			let sizes = newstate.cartSizes.slice()
@@ -127,6 +141,7 @@ const state_update = (state = init.main, action) => {
 			newstate.cartItems = c;
 			return newstate
 		}
+		//change quantity of item in cart
 		case change_quant_str: {
 			let array = newstate.cartQuant;
 			let quant = array[action.i];
@@ -142,6 +157,7 @@ const state_update = (state = init.main, action) => {
 			newstate.cartTotal = total;
 			return newstate
 		}
+		//clear cart
 		case clear_cart_str: {
 			let array = [];
 			newstate.cart = array

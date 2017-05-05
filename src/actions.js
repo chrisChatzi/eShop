@@ -1,4 +1,4 @@
-import { login_str, set_lang_str, change_path_str, selected_product_str,
+import { login_str, set_lang_str, change_path_str, selected_product_str, search_item_str,
         get_categories_str, get_products_str, rearrange_categories_str, 
         popupCategory_status_str, popupProducts_status_str, popupComments_status_str, msg_str,
         get_products_frontend_str, update_cart_str, sort_products_str,
@@ -27,6 +27,27 @@ import { loginAdmin, getItems, makeOrder, addCategory, deleteItem, updateCategor
         return {
             type: msg_str,
             text
+        };
+    };
+    //search item
+    export const search_item = (val, langIdx) => {
+         return (dispatch) => {
+            getItems("products", (res) => {
+                let products = [];
+                res.products.map( (v) => {
+                    if(v.title[langIdx].indexOf(val) >= 0){
+                        products.push(v);
+                    }
+                });
+                if(val == "") products = []
+                dispatch(search_item_action(products))
+            })
+        }
+    }
+    export const search_item_action = (products) => {
+        return {
+            type: search_item_str,
+            products
         };
     };
     //change language
@@ -170,7 +191,7 @@ import { loginAdmin, getItems, makeOrder, addCategory, deleteItem, updateCategor
         };
         export const add_product = (id, name, price, category, descr, size, color, tag, fabric, qual, dims, img, comments) => {
             return (dispatch) => {
-                addProduct(id, name, price, category, descr, size, color, tag, fabric, qual, dims, img, comments, (flag) => {
+                addProduct(id, name, price, category, descr, size, color, tag, fabric, qual, dims, img, comments, "", (flag) => {
                     if(flag){
                         getItems("products", (res) => {
                             dispatch(get_products(res.products))

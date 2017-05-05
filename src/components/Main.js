@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 
-const Main = ( {lang, state, open} ) => (
+const Main = ( {lang, state, open } ) => (
 	<div className="mainPage">
 		<div className="content">
-			<div className="best">{lang.home1}</div>
+			<div className="best animated fadeInDown">{lang.home1}</div>
 			<div className="show" onClick={open}>
 				<img id="carousel" src={"../img/carousel/"+state.carousel+".jpg"} />
 				<div id="carousel-tag" className="show-title">{lang.carousel[state.carousel-1]}</div>

@@ -12,7 +12,7 @@ categories
 UI
 main page
 footer : ok
-αναζήτηση
+αναζήτηση : ok
 analytics
 server : ok
 μαγιο
@@ -26,4 +26,5 @@ delivery info page
 firefox on select popup closes
 delete last from cart
 details responsive
-checkout responsive
+enlarge image at details natural size
+checkout responsive : ok
