@@ -4,25 +4,23 @@
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Header from './Header.js'
-import { get_categories } from '../actions.js'
-import { el, en } from '../constants.js'
-import ajax from 'ajax-query'
-
+import MainC from '../components/Main.js'
 import Footer from '../containers/Footer'
+import { change_path, get_products_frontend } from '../actions.js'
+import history from '../history.js'
 
 function mapStateToProps(state) {
 	return {
-		path : state.main.path,
 		lang : state.main.lang,
-		categories : state.categories
+		categories : state.main.categories
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		getData: (res) => {
-			dispatch(get_categories(res))
+		change_path: (category, product, categories) => {
+			if(product) dispatch(get_products_frontend(category, product))
+			dispatch(change_path(category, product, categories))
 		},
 	};
 }
@@ -30,60 +28,71 @@ function mapDispatchToProps(dispatch) {
 class Main extends Component {
 	static get propTypes() {
 		return {
-			path: PropTypes.string.isRequired,
-			categories: PropTypes.array.isRequired
+
 		}
 	}
 
 	constructor(props) {
 		super(props);
 
-		this.addContactHandler = this.addContactHandlerFunc.bind(this)
+		this.timer = 0;
+
+		this.state = {
+			carousel : 1
+		}
+
+		this.open = this.openHandler.bind(this);
 	}
 
 	componentDidMount() {
-		let options = {
-			url : "/categories",
-			type : "GET"
-		};
-		ajax.ajaxRequest(options, (res) => {
-			if(res.type == "ok") this.props.getData(res.categories)
-		});  
+		//carousel
+		this.carouselLoop();
+		this.timer = setInterval( () => {
+			this.carouselLoop();
+		}, 5000);
+	}
+	componentWillUnmount() {
+		clearInterval(this.timer);
 	}
 
-	addContactHandlerFunc() {
-		this.props.addContact();
+	carouselLoop(){
+		let carEl = document.getElementById("carousel")
+		let carTagEl = document.getElementById("carousel-tag")
+		setTimeout( () => {
+			carEl.classList.remove("animated");
+			carEl.classList.remove("fadeIn");
+			carTagEl.classList.remove("animated");
+			carTagEl.classList.remove("pulse");
+		}, 1000);
+		carEl.className += " animated fadeIn";
+		carTagEl.className += " animated pulse";
+		let idx = this.state.carousel;
+		idx++;
+		if(idx == 4) idx = 1;
+		this.setState({carousel : idx});
+		carTagEl.style.marginLeft = -(carTagEl.offsetWidth/2)+"px"
+	}
+	//open carousel on img click
+	openHandler(){
+		switch(this.state.carousel){
+			case 1:
+				this.props.change_path("tops", "short", this.props.categories);
+			break;
+			case 2:
+				this.props.change_path("trousers", "jeans", this.props.categories);
+			break;
+			case 3:
+				this.props.change_path("shirts", "long", this.props.categories);
+			break;
+		}
+		history.push("/products");
 	}
 
-	render() {
-		let { path, lang, categories } = this.props;
-		let { addContactHandler } = this;
-		
+	render() {	
 		return (
-			<div className="main">
-				<div className="content">
-					<div className="best">{lang.home1}</div>
-					<div className="infos">
-						<div className="info">
-							<div className="top"><i className="fa fa-truck"></i></div>
-							<div className="bot">{lang.homeInfo[0]}</div>
-						</div>
-						<div className="info">
-							<div className="top"><i className="fa fa-euro"></i></div>
-							<div className="bot">{lang.homeInfo[1]}</div>
-						</div>
-						<div className="info">
-							<div className="top"><i className="fa fa-undo"></i></div>
-							<div className="bot">{lang.homeInfo[2]}</div>
-						</div>
-						<div className="info">
-							<div className="top"><i className="fa fa-shopping-bag"></i></div>
-							<div className="bot">{lang.homeInfo[3]}</div>
-						</div>
-					</div>
-				</div>
+			<div>
+				<MainC lang={this.props.lang} state={this.state} open={this.open} />
 			</div>
-
 		)
 	}
 }

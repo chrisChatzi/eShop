@@ -22,7 +22,7 @@ const Header = ( { clickEvent, state, path, lang, langStr, langIdx, categories, 
 					</button>
 				</div>
 			{/*logo*/}
-				<div className="mid" onClick={home}>logo</div>
+				<div className="mid" onClick={home}>Κέντρο Jeans</div>
 			{/*right*/}
 				<div className="right">
 				{/*lang*/}

@@ -86,17 +86,18 @@ class Header extends Component {
 	}
 
 	componentWillUnmount(){
-		// const unlisten = history.listen((location, action) => {
-		// 	if(action == "POP"){
-		// 		let path = location.pathname;
-		// 		if(path == "/") path = ""
-		// 		if(path.indexOf("categories") >= 0){
-		// 			path = path.substring(path.lastIndexOf(":")+1, path.length);
-		// 		}
-		// 		this.props.change_path(path, this.props.categories);
-		// 		unlisten()
-		// 	}
-		// });
+		let path = location.pathname;
+		const unlisten = history.listen((location, action) => {
+			if(action == "POP"){
+				
+				if(path == "/") path = ""
+				// if(path.indexOf("categories") >= 0){
+				// 	path = path.substring(path.lastIndexOf(":")+1, path.length);
+				// }
+				if(path == "/") this.props.change_path(path, this.props.categories);
+				unlisten()
+			}
+		});
 	}
 	componentDidUpdate(){
 		let timeout = 0;

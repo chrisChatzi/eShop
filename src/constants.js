@@ -40,12 +40,17 @@ const el = {
 			["ΤΖΙΝΣ", "ΚΑΠΑΡΝΤΙΝΕ", "ΦΟΥΤΕΡ", "ΒΕΡΜΟΥΔΕΣ"]
 		],
 	//main
-		home1 : "Πιο φθηνά, πουθενά",
+		home1 : "Τόσο φθηνά, όσο πουθενά",
 		homeInfo : [
 			"Παράδοση εντός 3 ημέρων με ___ courrier",
-			"Δωρεάν μεταφορικά με αγορές άνω των 30 \u20AC",
+			"Δωρεάν μεταφορικά με αγορές άνω των 30\u20AC",
 			"Επιστροφές εντός 7 ημερών",
 			"Δυνατότητα παραλαβής από το κατάστημα"
+		],
+		carousel : [
+			"Μπλούζες κοντομάνικες απο 7\u20AC",
+			"Τζιν παντελόνια απο 19\u20AC",
+			"qweqweqweqwewqe"
 		],
 	//products
 		products : "προϊόντα",
@@ -101,7 +106,7 @@ const el = {
 			"black" : "Μαύρο"
 		},
 		noProducts : "Δεν υπάρχουν προϊόντα",
-	// product details
+	//product details
 		addCart : "Προσθήκη στο καλάθι",
 		addedCart : "Προστέθηκε στο καλάθι",
 		imgLabel : "Πατήστε για μεγέθυνση",
@@ -155,7 +160,14 @@ const el = {
 		orderBack : "Πίσω στην αρχική σελίδα",
 	//footer
 		contact : "Επικοινωνία",
-		infoFooter : ["Πληροφορίες","Παραγγελίες/Παραδόσεις","Οδηγός μεγέθους","Όροι χρήσης"]
+		infoFooter : ["Πληροφορίες","Παραγγελίες/Παραδόσεις","Οδηγός μεγέθους","Όροι χρήσης"],
+	//delivery
+		deliHead : ["Παραδόσεις","Παραγγελίες",";ςε;ςε"],
+		deliTxt : [
+			"Οι παραδόσεις πραγματοποιούνται με χχχ courrier και εντός 1 με 3 ημερών.",
+			"Οι παραγγελίες ...",
+			";ςε;ςε;ςε"
+		]
 }
 const en = {
 	//header
@@ -172,10 +184,15 @@ const en = {
 		home1 : "Really cheap",
 		homeInfo : [
 				"Delivery within 3 days with ___ courrier",
-				"Free delivery on orders over 30 \u20AC",
+				"Free delivery on orders over 30\u20AC",
 				"Return within 7 days",
 				"Pick up at the store"
 			],
+		carousel : [
+			"T-shirts from 7\u20AC",
+			"Jeans from 19\u20AC",
+			"rtyrtyrtyrty"
+		],
 	//products
 		products : "products",
 		sort : "Sort",
@@ -283,7 +300,14 @@ const en = {
 		orderBack : "Back to home page",
 	// footer
 		contact : "Contact",
-		infoFooter : ["Info","Help","Guide","Legal"]
+		infoFooter : ["Info","Help","Guide","Legal"],
+	//delivery
+		deliHead : ["Delivery","Order","qweqweqwe"],
+		deliTxt : [
+			"Οι παραδόσεις πραγματοποιούνται με χχχ courrier και εντός 1 με 3 ημερών.",
+			"Οι παραγγελίες ...",
+			"qweqweqwwe"
+		]
 }
 
 const sub =  [

@@ -39,7 +39,7 @@ class Footer extends Component {
 	}
 
 	deliveryHandler(){
-
+		history.push("/delivery")
 	}
 	sizeHandler(){
 

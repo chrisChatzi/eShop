@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
 const Order = ( {lang, langIdx, home} ) => (
-	<div className="">
+	<div className="legal">
 		<h3>Όροι & Προϋποθέσεις</h3>
 
 <h4>1. Γενικά</h4>

@@ -17,6 +17,7 @@ import Cart from './routes/Cart'
 import Checkout from './routes/Checkout'
 import Order from './routes/Order'
 import Legal from './routes/Legal'
+import Delivery from './routes/Delivery'
 
 import { createStore, applyMiddleware } from 'redux'
 import reducer from './reducers'
@@ -27,9 +28,31 @@ let store = createStore(
 )
 
 //clear cache
-for(let i=0; i<en.categories.length; i++){
-	for(let j=0; j<en.sub[i].length; j++)
-		localStorage.setItem("sub-"+en.categories[i].toLowerCase()+"-"+en.sub[i][j].toLowerCase(), "");
+let categories = [
+		{
+			id : "tops",
+			sub : ["short","long","knitwear","tanktop"]
+		},
+		{
+			id : "cardigans",
+			sub : ["knitwear", "hoodies"]
+		},
+		{
+			id : "shirts",
+			sub : ["short","long"]
+		},
+		{
+			id : "jackets",
+			sub : ["tanktop", "normal"]
+		},
+		{
+			id : "trousers",
+			sub : ["jeans", "chinos", "joggers", "shorts"]
+		},
+	];
+for(let i=0; i<categories.length; i++){
+	for(let j=0; j<categories[i].sub.length; j++)
+		localStorage.removeItem("sub-"+categories[i].id+"-"+categories[i].sub[j].toLowerCase());
 }
 
 desktop()
@@ -47,6 +70,7 @@ function desktop(){
 				<Route path='/checkout' component={Checkout} />
 				<Route path='/order' component={Order} />
 				<Route path='/legal' component={Legal} />
+				<Route path='/delivery' component={Delivery} />
 			</div></Router>
 		</Provider>,
 		document.getElementById('app')

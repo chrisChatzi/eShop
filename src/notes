@@ -20,7 +20,10 @@ comments approve : ok
 server paths (/product: etc)
 caching (with local storage) : ok
 add to google maps
+delivery info page
 ---
 -- bugs
 firefox on select popup closes
 delete last from cart
+details responsive
+checkout responsive
