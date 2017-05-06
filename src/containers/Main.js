@@ -45,6 +45,7 @@ class Main extends Component {
 	}
 
 	componentDidMount() {
+		window.scrollTo(0, 0);
 		//carousel
 		this.carouselLoop();
 		this.timer = setInterval( () => {
@@ -58,6 +59,7 @@ class Main extends Component {
 	carouselLoop(){
 		let carEl = document.getElementById("carousel")
 		let carTagEl = document.getElementById("carousel-tag")
+		let carButtonEl = document.getElementById("carousel-button")
 		setTimeout( () => {
 			carEl.classList.remove("animated");
 			carEl.classList.remove("fadeIn");
@@ -70,19 +72,21 @@ class Main extends Component {
 		idx++;
 		if(idx == 4) idx = 1;
 		this.setState({carousel : idx});
+
 		carTagEl.style.marginLeft = -(carTagEl.offsetWidth/2)+"px"
+		carButtonEl.style.marginLeft = -(carButtonEl.offsetWidth/2)+"px"
 	}
 	//open carousel on img click
 	openHandler(){
 		switch(this.state.carousel){
 			case 1:
-				this.props.change_path("tops", "short", this.props.categories);
+				this.props.change_path("trousers", "short", this.props.categories);
 			break;
 			case 2:
 				this.props.change_path("trousers", "jeans", this.props.categories);
 			break;
 			case 3:
-				this.props.change_path("shirts", "long", this.props.categories);
+				this.props.change_path("tops", "long", this.props.categories);
 			break;
 		}
 		history.push("/products");

@@ -4,9 +4,10 @@ const Main = ( {lang, state, open } ) => (
 	<div className="mainPage">
 		<div className="content">
 			<div className="best animated fadeInDown">{lang.home1}</div>
-			<div className="show" onClick={open}>
+			<div className="show">
 				<img id="carousel" src={"../img/carousel/"+state.carousel+".jpg"} />
 				<div id="carousel-tag" className="show-title">{lang.carousel[state.carousel-1]}</div>
+				<div id="carousel-button" className="show-button" onClick={open}>{lang.moreInfo}</div>
 			</div>
 			<div className="infos">
 				<div className="info">

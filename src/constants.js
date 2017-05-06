@@ -51,8 +51,9 @@ const el = {
 		carousel : [
 			"Μπλούζες κοντομάνικες απο 7\u20AC",
 			"Τζιν παντελόνια απο 19\u20AC",
-			"Βερμούδες από 14\u20AC"
+			"Μπλούζες από 14\u20AC"
 		],
+		moreInfo : "Δες περισσότερα",
 	//products
 		products : "προϊόντα",
 		sort : "Ταξινόμηση",
@@ -192,8 +193,9 @@ const en = {
 		carousel : [
 			"T-shirts from 7\u20AC",
 			"Jeans from 19\u20AC",
-			"Shorts from 14\u20AC"
+			"Tops from 14\u20AC"
 		],
+		moreInfo : "Check it out",
 	//products
 		products : "products",
 		sort : "Sort",

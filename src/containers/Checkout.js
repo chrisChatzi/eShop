@@ -71,6 +71,7 @@ class Checkout extends Component {
 	}
 
 	componentDidMount() {
+		window.scrollTo(0, 0);
 		let h = window.innerHeight;
 		document.getElementById("checkoutBody").style.minHeight = h+"px";
 	}

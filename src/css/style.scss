@@ -164,8 +164,8 @@ $headerMain: #213132;
 
 /*reused divs*/
 	.mainframe{
-		width: 80%;
-		padding: 10px 10%;
+		width: 100%;
+		padding: 10px 0%;
 		@media (max-width: 1100px) {
 			width: 90%;
 			padding: 10px 5%;
@@ -292,6 +292,16 @@ $headerMain: #213132;
 		color: $mainRed;
 		font-weight: bold;
 		background: #f5f5f5;
+	}
+	/*all divs*/
+	.allContentsDiv{
+		width: 80%;
+		padding: 10px 10%;
+		@include setColors(#242428, #fff);
+		@media (max-width : 700px){
+			width: 90%;
+			padding: 10px 5%;
+		}
 	}
 /*MESSAGE*/
 	.message{
@@ -743,12 +753,18 @@ $headerMain: #213132;
 		.headerMenu{
 			@include setHeight(40px);
 			@extend .mainframe;
+			width: 80%;
+			padding: 0 10%;
 			overflow: auto;
 			padding-top: 0;
 			padding-bottom: 0;
 			font-weight: 900;
 			box-shadow: 0px 2px 5px 1px rgba(0,0,0,0.25);
 			@include setColors(#555, #fff);
+			@media (max-width: 900px) {
+				width: 100%;
+				padding: 0;
+			}
 			@media (max-width: 700px) {
 				@include setHeight(200px);
 			}
@@ -781,6 +797,12 @@ $headerMain: #213132;
 			to{ height: 180px; }
 		}
 		.subMenu{
+			width: 80%;
+			padding: 0 10%;
+			@media (max-width: 900px) {
+				width: 100%;
+				padding: 0;
+			}
 			@media (max-width: 700px) {
 				display: none;
 			}
@@ -936,6 +958,7 @@ $headerMain: #213132;
 					width: 100%;
 					height: auto;
 					max-height: 500px;
+					object-fit: cover;
 				}
 				.show-title{
 					@include setAbsolute(50%, auto, 50%, auto, auto, 40px);
@@ -947,6 +970,22 @@ $headerMain: #213132;
 					letter-spacing: 0.1em;
 					font-weight: bold;
 					color: #fff;
+				}
+				.show-button{
+					@include setAbsolute(65%, auto, 50%, auto, auto, 40px);
+					line-height: 40px;
+					/*margin-top: 10px;*/
+					padding: 0 10px;
+					/*text-shadow: 2px 5px 5px rgba(0,0,0,0.5);*/
+					font-size: 18px;
+					letter-spacing: 0.1em;
+					font-weight: bold;
+					@include setColors(#fff, transparent);
+					border: 1px solid #fff;
+					&:hover{
+						transition: 0.75s;
+						@include setColors(#242428, #fff);
+					}
 				}
 			}
 			.infos{
@@ -987,16 +1026,31 @@ $headerMain: #213132;
 	.categories{
 		overflow: auto;
 		@extend .mainframe;
+		@extend .allContentsDiv;
 		@extend .contentMain;
+		.head{
+			@include setDimensions("", 100%, 80px, 80px, 10px 0, "");
+			border: 3px solid #242428;
+			font-size: 2vw;
+			letter-spacing: 0.25rem;
+			color: #242428;
+			@media (max-width: 900px) {
+				width: 100%;
+				margin: 10px 0;
+			}
+		}
 		.section{
 			position: relative;
 			@include setDimensions(left, 23%, 360px, "", 10px 1%, "");
 			cursor: pointer;
 			box-sizing: border-box;
+			color: #fff;
 			.img{
 				@include setDimensions("", 100%, 300px, 300px, "", "");
 				img{
-					height: 100%; width: 100%; object-fit: contain;
+					height: 100%;
+					width: 100%;
+					object-fit: contain;
 				}
 			}
 			@media (max-width : 1100px){
@@ -1195,9 +1249,7 @@ $headerMain: #213132;
 	.products{
 		overflow: auto;
 		@extend .contentMain;
-		width: 80%;
-		padding: 10px 10%;
-		@include setColors(#242428, #fff);
+		@extend .allContentsDiv;
 		.head{
 			@include setDimensions("", 100%, 80px, 80px, 10px 0, "");
 			border: 3px solid #242428;
@@ -1217,7 +1269,8 @@ $headerMain: #213132;
 			.img{
 				@include setDimensions("", 100%, 300px, 300px, "", "");
 				img{
-					height: 100%; width: 100%; object-fit: contain;
+					height: 100%; width: 100%;
+					object-fit: contain;
 				}
 			}
 			.title{
@@ -1406,6 +1459,8 @@ $headerMain: #213132;
 		overflow: auto;
 		@extend .contentMain;
 		@extend .mainframe;
+		width: 80%;
+		padding: 10px 10%;
 		@include setColors(#242428, #fff);
 		.head{
 			margin: 10px 0 20px 0;
@@ -1620,8 +1675,8 @@ $headerMain: #213132;
 			}
 		}
 		.comments{
-			width: 80%;
-			margin: 50px 10% 20px 10%;
+			width: 100%;
+			margin: 50px 0 20px 0;
 			overflow: auto;
 			.head{
 				@include setHeight(50px);
@@ -1715,18 +1770,17 @@ $headerMain: #213132;
 	.cart{
 		overflow: auto;
 		@extend .contentMain;
-		width: 80%;
-		padding: 10px 10%;
-		@include setColors(#242428, #fff);
-		@media (max-width : 750px){
-			width: 100%;
-			padding: 10px 0;
-		}
+		@extend .allContentsDiv;
 		.head{
-			@include setHeight(90px);
-			margin: 10px 0;
-			border-top: 1px solid #242428;
-			border-bottom: 1px solid #242428;
+			@include setDimensions("", 100%, 80px, 80px, 10px 0, "");
+			border: 3px solid #242428;
+			font-size: 2vw;
+			letter-spacing: 0.25rem;
+			color: #242428;
+			@media (max-width: 900px) {
+				width: 100%;
+				margin: 10px 0;
+			}
 		}
 		.none{
 			margin-top: 20px;
@@ -1803,18 +1857,21 @@ $headerMain: #213132;
 	.checkout{
 		overflow: auto;
 		@extend .contentMain;
-		width: 100%;
-		padding: 10px 0%;
-		@include setColors(#242428, #fff);
+		@extend .allContentsDiv;
 		@media only screen and (max-width : 750px){
-			width: 100%;
-			padding: 10px 0;
+			/*width: 100%;*/
+			/*padding: 10px 0;*/
 		}
 		.head{
-			@include setHeight(90px);
-			margin: 10px 0;
-			border-top: 1px solid #242428;
-			border-bottom: 1px solid #242428;
+			@include setDimensions("", 100%, 80px, 80px, 10px 0, "");
+			border: 3px solid #242428;
+			font-size: 2vw;
+			letter-spacing: 0.25rem;
+			color: #242428;
+			@media (max-width: 900px) {
+				width: 100%;
+				margin: 10px 0;
+			}
 		}
 		.none{
 			margin-top: 20px;

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 
 const Categories = ( { lang, categories, selectedCategory, clickCategory } ) => (
 	<div className="categories">
+		<div className="head">{lang.categories[selectedCategory.idx]}</div>
 		{categories.map( (v, i) =>
 			<div className="section animated zoomIn" 
 				key={i} onClick={()=>clickCategory(i)}

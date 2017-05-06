@@ -72,6 +72,7 @@ class Categories extends Component {
 	}
 
 	componentDidMount(){
+		window.scrollTo(0, 0);
 		let h = window.innerHeight;
 		document.getElementById("productsBody").style.minHeight = h+"px";
 	}

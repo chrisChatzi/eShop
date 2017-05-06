@@ -80,6 +80,7 @@ class Details extends Component {
 	}
 
 	componentDidMount() {
+		window.scrollTo(0, 0);
 		let h = window.innerHeight;
 		document.getElementById("detailsBody").style.minHeight = h+"px";
 	}

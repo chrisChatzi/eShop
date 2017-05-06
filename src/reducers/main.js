@@ -133,8 +133,7 @@ const state_update = (state = init.main, action) => {
 			newstate.cartQuant = quant
 			let c = newstate.cartItems;
 			c--;
-			let total = 0
-			console.log(q)
+			let total = 0;
 			for(let i=0; i<array.length; i++)
 				total += array[i].price * quant[i];
 			newstate.cartTotal = total;

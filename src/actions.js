@@ -35,7 +35,7 @@ import { loginAdmin, getItems, makeOrder, addCategory, deleteItem, updateCategor
             getItems("products", (res) => {
                 let products = [];
                 res.products.map( (v) => {
-                    if(v.title[langIdx].indexOf(val) >= 0){
+                    if(v.title[langIdx].toLowerCase().indexOf(val.toLowerCase()) >= 0){
                         products.push(v);
                     }
                 });
