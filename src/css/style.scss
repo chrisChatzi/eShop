@@ -230,21 +230,7 @@ $headerMain: #213132;
 		border: 1px solid #ccc;
 		max-height: 450px;
 		background: #fff;
-		::-webkit-scrollbar {
-		 	width: 10px;
-		}
-		/* Track */
-		::-webkit-scrollbar-track {
-			-webkit-border-radius: 10px;
-			background-color: #f0f0f0;
-			border-radius: 10px;
-		}
-		/* Handle */
-		::-webkit-scrollbar-thumb {
-		 	-webkit-border-radius: 2px;
-		 	border-radius: 2px;
-			background: #666; 
-		}
+		@extend .scroll;
 		box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.5);
 		cursor: pointer;
 		.items{
@@ -303,6 +289,61 @@ $headerMain: #213132;
 			padding: 10px 5%;
 		}
 	}
+	/*scroll*/
+	.scroll{
+		::-webkit-scrollbar {
+		 	width: 10px;
+		}
+		/* Track */
+		::-webkit-scrollbar-track {
+			-webkit-border-radius: 10px;
+			background-color: #f0f0f0;
+			border-radius: 10px;
+		}
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+		 	-webkit-border-radius: 2px;
+		 	border-radius: 2px;
+			background: #666; 
+		}	
+	}
+
+/*ANIMATIONS*/
+	@keyframes slideDown{
+		from{ height: 0; }
+		to{ height: 180px; }
+	}
+	@keyframes slideDownShort{
+		from{ height: 0; opacity: 0; }
+		to{ height: 90px; opacity: 1 }
+	}
+	@keyframes bounceIn {
+		from, 20%, 40%, 60%, 80%, to {
+			animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+		}
+		0% {
+			opacity: 0;
+			transform: scale3d(.3, .3, .3);
+		}
+		20% {
+			transform: scale3d(1.1, 1.1, 1.1);
+		}
+		40% {
+			transform: scale3d(.9, .9, .9);
+		}
+		60% {
+			opacity: 1;
+			transform: scale3d(1.03, 1.03, 1.03);
+		}
+		80% {
+			transform: scale3d(.97, .97, .97);
+		}
+		to {
+			opacity: 1;
+			transform: scale3d(1, 1, 1);
+		}
+	}
+
 /*MESSAGE*/
 	.message{
 		@include setAbsolute(auto, 20px, auto, 20px, auto, 40px);
@@ -598,7 +639,7 @@ $headerMain: #213132;
 					padding: 0 20px;
 					&:hover{
 						transition: 0.25s;
-						background: #e7e7e7;
+						@include setColors(#fff, $headerMain);
 					}
 					.idx{
 						$size : 17px;
@@ -630,24 +671,20 @@ $headerMain: #213132;
 			.lang{
 				@include setAbsolute(60px, auto, auto, 59px, auto, auto);
 				padding: 5px 0;
-				width: 60px;
+				width: 100px;
 				border: 1px solid #ccc;
 				background: #fff;
 				box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.5);
 				cursor: pointer;
+				animation: slideDownShort 1s 1;
 				.row{
-					@include setHeight(25px);
-					&:hover{
+					@include setHeight(30px);
+					&:not(.on):hover{
 						transition: 0.25s;
-						background: #e7e7e7;
+						@include setColors(#fff, $headerMain);
 					}
 				}
-				.on{
-					background: #e0e0e0;
-				}
-				.flagGr{ content:url("../img/general/greek.png"); }
-				.flagEn{ content:url("../img/general/english.png"); }
-				.flagDe{ content:url("../img/general/german.png"); }
+				.on{ @extend .activeEl; }
 			}
 		/* ---------- */
 		@keyframes slideUp{
@@ -660,7 +697,7 @@ $headerMain: #213132;
 			display: none;
 		}
 		.hover{
-			background: #e7e7e7;
+			@include setColors(#fff, $headerMain);
 		}
 		/*header very top (search, logo, options at right)*/
 		.headerMain{
@@ -698,7 +735,7 @@ $headerMain: #213132;
 					padding: 0 20px;
 					&:hover{
 						transition: 0.25s;
-						background: #e7e7e7;
+						@include setColors(#fff, $headerMain);
 					}
 					.idx{
 						$size : 17px;
@@ -712,33 +749,6 @@ $headerMain: #213132;
 			}
 			.cartAnimation{
 				animation: bounceIn 1s 1;
-			}
-			/*@keyframes mymove {*/
-			@keyframes bounceIn {
-				from, 20%, 40%, 60%, 80%, to {
-					animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-				}
-				0% {
-					opacity: 0;
-					transform: scale3d(.3, .3, .3);
-				}
-				20% {
-					transform: scale3d(1.1, 1.1, 1.1);
-				}
-				40% {
-					transform: scale3d(.9, .9, .9);
-				}
-				60% {
-					opacity: 1;
-					transform: scale3d(1.03, 1.03, 1.03);
-				}
-				80% {
-					transform: scale3d(.97, .97, .97);
-				}
-				to {
-					opacity: 1;
-					transform: scale3d(1, 1, 1);
-				}
 			}
 			input{
 				padding-right: 2.5rem;
@@ -792,57 +802,56 @@ $headerMain: #213132;
 			}
 		}
 		/*sub-categories*/
-		@keyframes slideDown{
-			from{ height: 0; }
-			to{ height: 180px; }
-		}
-		.subMenu{
-			width: 80%;
-			padding: 0 10%;
-			@media (max-width: 900px) {
-				width: 100%;
-				padding: 0;
-			}
-			@media (max-width: 700px) {
-				display: none;
-			}
-			@include setHeight(180px);
-			overflow: auto;
-			overflow-y: hidden;
-			@include setColors(#555, #fff);
-			@extend .mainframe;
-			width: auto;
-			box-sizing: border-box;
-			border-top: 1px solid #ccc;
-			box-shadow: 0px 2px 5px 1px rgba(0,0,0,0.25);
-			animation: slideDown 1s 1;
-			.item{
-				float: left;
-				width: 20%;
-			}
-			.active{
-				@extend .activeEl;
-				/*color: $mainRed;
+			.subMenu{
+				width: 80%;
+				padding: 10px 10%;
+				@media (max-width: 900px) {
+					width: 100%;
+					padding: 0;
+				}
+				@media (max-width: 700px) {
+					display: none;
+				}
+				@include setHeight(180px);
+				overflow: auto;
+				overflow-y: hidden;
+				@include setColors(#555, #fff);
+				@extend .mainframe;
+				width: auto;
 				box-sizing: border-box;
-				background: #f5f5f5;*/
-			}
-			.row{
-				font-size: 14px;
-				@include setHeight(40px);
-				cursor: pointer;
-				&:not(.active):hover{
-					transition: 0.25s;
-					background: $headerMain;
-					color: #fff;
+				border-top: 1px solid #ccc;
+				box-shadow: 0px 2px 5px 1px rgba(0,0,0,0.25);
+				animation: slideDown 0.5s 1;
+				.item{
+					float: left;
+					width: 20%;
+				}
+				.active{
+					@extend .activeEl;
+					/*color: $mainRed;
+					box-sizing: border-box;
+					background: #f5f5f5;*/
+				}
+				.row{
+					font-size: 14px;
+					@include setHeight(40px);
+					cursor: pointer;
+					&:not(.active):hover{
+						transition: 0.25s;
+						background: $headerMain;
+						color: #fff;
+					}
 				}
 			}
-		}
 		/*search*/
 			.search{
 				@include setAbsolute(50px, auto, 10px, auto, 400px, auto);
 				@include setColors(#242428, #fff);
 				@include setBorders(4px, 1px solid $mainBlueLight);
 				box-sizing: border-box;
+				max-height: 200px;
+				@extend .scroll;
+				overflow: auto;
 				.row{
 					@include setHeight(35px);
 					text-align: left;
@@ -1255,7 +1264,6 @@ $headerMain: #213132;
 			border: 3px solid #242428;
 			font-size: 2vw;
 			letter-spacing: 0.25rem;
-			/*background: rgba(0,0,0,0.25);*/
 			@media (max-width: 900px) {
 				width: 100%;
 				margin: 10px 0;
@@ -1291,7 +1299,7 @@ $headerMain: #213132;
 			@media (max-width : 750px) and (min-width : 481px) {
 				width: 48%;
 			}
-			@media (max-width : 900px) and (min-width : 751px) {
+			@media (max-width : 1000px) and (min-width : 751px) {
 				width: 31%;
 			}
 		}
@@ -1807,7 +1815,7 @@ $headerMain: #213132;
 				padding: 7px 24px;
 			}
 		}
-		@media (max-width : 750px){
+		@media (max-width : 950px){
 			.items, .checkoutC{ width: 100%; margin-left: 0; }
 		}
 		@extend .cartItemRow;
@@ -1858,17 +1866,13 @@ $headerMain: #213132;
 		overflow: auto;
 		@extend .contentMain;
 		@extend .allContentsDiv;
-		@media only screen and (max-width : 750px){
-			/*width: 100%;*/
-			/*padding: 10px 0;*/
-		}
 		.head{
 			@include setDimensions("", 100%, 80px, 80px, 10px 0, "");
 			border: 3px solid #242428;
 			font-size: 2vw;
 			letter-spacing: 0.25rem;
 			color: #242428;
-			@media (max-width: 900px) {
+			@media (max-width: 1000px) {
 				width: 100%;
 				margin: 10px 0;
 			}
@@ -1879,7 +1883,7 @@ $headerMain: #213132;
 		.action{
 			float: left;
 			width: calc(100% - 350px);
-			@media (max-width: 900px) {
+			@media (max-width: 1100px) {
 				width: 100%;
 			}
 			.dots{
@@ -1936,6 +1940,9 @@ $headerMain: #213132;
 				.row{
 					@include setHeight(80px);
 					overflow: auto;
+					@media (max-width: 700px) {
+						height: auto;
+					}
 					.block{
 						@include setHeight(70px);
 						margin: 5px 0;
@@ -2011,6 +2018,7 @@ $headerMain: #213132;
 							}
 							@media (max-width: 700px) {
 								width: 98%;
+								margin: 5px 1%;
 							}
 						}
 						.typeOn{
@@ -2023,8 +2031,12 @@ $headerMain: #213132;
 					.street{ float: left; width: 35%; margin-right: 10px; }
 					.number{ float: left; width: 15%; margin-right: 10px; }
 					.info{ float: left; width: calc(50% - 20px); }
-					.post{ float: left; width: 15%; margin-right: 10px; }
+					.post{ float: left; width: 20%; margin-right: 10px; }
 					.city{ float: left; width: 30%; }
+					@media (max-width: 500px) {
+						.post{ float: left; width: 30%; margin-right: 10px; }
+						.city{ float: left; width: 50%; }
+					}
 				}
 				.next{
 					margin-top: 20px;
@@ -2036,7 +2048,10 @@ $headerMain: #213132;
 					.left{ float: left; width: 30%; color: $mainBlue; }
 					.right{ float: left; width: 70%; }
 					@media (max-width: 900px) {
-						
+						width: 100%;
+						margin: 5px 0;
+						.left{ float: left; width: 20%; color: $mainBlue; }
+						.right{ float: left; width: 80%; }
 					}
 				}
 			}
@@ -2051,8 +2066,9 @@ $headerMain: #213132;
 				@extend .cartHeadClass;
 				padding: 0;
 				margin: 0;
-				box-shadow: 0;
-				border: 0;
+				box-shadow: none;
+				border: 1px solid #242428;
+				box-sizing: border-box;
 				.title{
 					@include setHeight(50px);
 					font-size: 20px;

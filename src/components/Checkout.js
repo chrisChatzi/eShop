@@ -309,7 +309,7 @@ const Checkout = ( {state, cart, cartSizes, cartColors, cartQuant, cartTotal, la
 										</div>
 								</div>
 							{/*next*/}
-								<div className="row next">
+								<div className="infoBlock deal">
 									<div className="button" onClick={()=>makeOrder()}>{lang.reviewMake}</div>
 								</div>
 							</div>
