@@ -111,8 +111,12 @@ const state_update = (state = init.main, action) => {
 			let c = newstate.cartItems;
 			c++;
 			let total = 0;
-			for(let i=0; i<array.length; i++)
+			let totalEach = []
+			for(let i=0; i<array.length; i++){
 				total += array[i].price * quant[i];
+				totalEach.push(array[i].price * quant[i])
+			}
+			newstate.cartTotalItem = totalEach;
 			newstate.cartTotal = total;
 			newstate.cartItems = c;
 			return newstate
@@ -134,8 +138,12 @@ const state_update = (state = init.main, action) => {
 			let c = newstate.cartItems;
 			c--;
 			let total = 0;
-			for(let i=0; i<array.length; i++)
+			let totalEach = []
+			for(let i=0; i<array.length; i++){
 				total += array[i].price * quant[i];
+				totalEach.push(array[i].price * quant[i])
+			}
+			newstate.cartTotalItem = totalEach;
 			newstate.cartTotal = total;
 			newstate.cartItems = c;
 			return newstate
@@ -150,9 +158,13 @@ const state_update = (state = init.main, action) => {
 			array[action.i] = quant;
 			newstate.cartQuant = array
 			let total = 0
+			let totalEach = []
 			let arrayC = newstate.cart.slice()
-			for(let i=0; i<arrayC.length; i++)
+			for(let i=0; i<arrayC.length; i++){
 				total += arrayC[i].price * array[i];
+				totalEach.push(arrayC[i].price * array[i])
+			}
+			newstate.cartTotalItem = totalEach;
 			newstate.cartTotal = total;
 			return newstate
 		}
@@ -165,6 +177,7 @@ const state_update = (state = init.main, action) => {
 			newstate.cartQuant = array
 			newstate.cartItems = 0
 			newstate.cartTotal = 0
+			newstate.cartTotalItem = array;
 			return newstate
 		}
 		default:

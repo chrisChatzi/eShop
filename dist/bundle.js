@@ -36386,6 +36386,7 @@ var Cart = function Cart(_ref) {
 	    cartColors = _ref.cartColors,
 	    cartQuant = _ref.cartQuant,
 	    cartTotal = _ref.cartTotal,
+	    cartTotalItem = _ref.cartTotalItem,
 	    lang = _ref.lang,
 	    langIdx = _ref.langIdx,
 	    checkout = _ref.checkout,
@@ -36472,7 +36473,7 @@ var Cart = function Cart(_ref) {
 						_react2.default.createElement(
 							"div",
 							{ className: "total" },
-							state.totalItem[i],
+							cartTotalItem[i],
 							" \u20AC"
 						)
 					);
@@ -38005,7 +38006,7 @@ var Header = function Header(_ref) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'mid', onClick: home },
-					'\u039A\u03AD\u03BD\u03C4\u03C1\u03BF Jeans'
+					_react2.default.createElement('img', { src: '../img/general/logo.png' })
 				),
 				_react2.default.createElement(
 					'div',
@@ -40003,14 +40004,14 @@ var PopupProduct = function PopupProduct(_ref) {
 				{ className: state.dimensionsCheck ? "valueError right pop" : "right pop" },
 				_react2.default.createElement(
 					"div",
-					{ className: "rows" },
+					{ className: "rows pop" },
 					_react2.default.createElement("img", { src: "../img/general/top1.png" }),
 					_react2.default.createElement("img", { src: "../img/general/top2.png" }),
 					_react2.default.createElement("img", { src: "../img/general/top3.png" })
 				),
 				_react2.default.createElement(
 					"div",
-					{ className: "rows" },
+					{ className: "rows pop" },
 					_react2.default.createElement("img", { src: "../img/general/p1.png" }),
 					_react2.default.createElement("img", { src: "../img/general/p2.png" }),
 					_react2.default.createElement("img", { src: "../img/general/p3.png" }),
@@ -40019,15 +40020,15 @@ var PopupProduct = function PopupProduct(_ref) {
 				state.dims.map(function (v, i) {
 					return _react2.default.createElement(
 						"div",
-						{ className: "size", key: i },
+						{ className: "size pop", key: i },
 						_react2.default.createElement(
 							"div",
-							{ className: "size-head" },
+							{ className: "size-head pop" },
 							state.size[i]
 						),
 						_react2.default.createElement(
 							"div",
-							{ className: "size-main" },
+							{ className: "size-main pop" },
 							"A: ",
 							_react2.default.createElement("input", { defaultValue: data && state.size[i] ? item.dims[i][state.size[i]][0] : 0,
 								className: "small pop", onChange: function onChange(e) {
@@ -41768,6 +41769,7 @@ function mapStateToProps(state, ownProps) {
 		cartColors: state.main.cartColors,
 		cartQuant: state.main.cartQuant,
 		cartTotal: state.main.cartTotal,
+		cartTotalItem: state.main.cartTotalItem,
 		lang: state.main.lang,
 		langIdx: state.main.langIdx
 	};
@@ -41869,6 +41871,7 @@ var Cart = function (_Component) {
 			    cartColors = _props.cartColors,
 			    cartQuant = _props.cartQuant,
 			    cartTotal = _props.cartTotal,
+			    cartTotalItem = _props.cartTotalItem,
 			    lang = _props.lang,
 			    langIdx = _props.langIdx;
 			var changeQuant = this.changeQuant,
@@ -41881,7 +41884,7 @@ var Cart = function (_Component) {
 				{ className: '' },
 				_react2.default.createElement(_Cart2.default, { state: this.state, checkout: checkout,
 					cart: cart, cartSizes: cartSizes, cartColors: cartColors, cartQuant: cartQuant,
-					cartTotal: cartTotal,
+					cartTotal: cartTotal, cartTotalItem: cartTotalItem,
 					changeQuant: changeQuant, deleteItem: deleteItem,
 					lang: lang, langIdx: langIdx })
 			);
@@ -44923,7 +44926,8 @@ var main = {
 	cart: [],
 	cartSizes: [],
 	cartColors: [],
-	cartQuant: [],
+	cartQuant: [], //holds the quantity of each item in the cart
+	cartTotalItem: [], //holds the total cost for each item in the cart
 	cartItems: 0,
 	cartTotal: 0,
 	showCart: false
@@ -45199,9 +45203,13 @@ var state_update = function state_update() {
 				var c = newstate.cartItems;
 				c++;
 				var total = 0;
+				var totalEach = [];
 				for (var i = 0; i < _array.length; i++) {
 					total += _array[i].price * quant[i];
-				}newstate.cartTotal = total;
+					totalEach.push(_array[i].price * quant[i]);
+				}
+				newstate.cartTotalItem = totalEach;
+				newstate.cartTotal = total;
 				newstate.cartItems = c;
 				return newstate;
 			}
@@ -45223,9 +45231,13 @@ var state_update = function state_update() {
 				var _c = newstate.cartItems;
 				_c--;
 				var _total = 0;
+				var _totalEach = [];
 				for (var _i = 0; _i < _array2.length; _i++) {
 					_total += _array2[_i].price * _quant[_i];
-				}newstate.cartTotal = _total;
+					_totalEach.push(_array2[_i].price * _quant[_i]);
+				}
+				newstate.cartTotalItem = _totalEach;
+				newstate.cartTotal = _total;
 				newstate.cartItems = _c;
 				return newstate;
 			}
@@ -45240,10 +45252,14 @@ var state_update = function state_update() {
 				_array3[action.i] = _quant2;
 				newstate.cartQuant = _array3;
 				var _total2 = 0;
+				var _totalEach2 = [];
 				var arrayC = newstate.cart.slice();
 				for (var _i2 = 0; _i2 < arrayC.length; _i2++) {
 					_total2 += arrayC[_i2].price * _array3[_i2];
-				}newstate.cartTotal = _total2;
+					_totalEach2.push(arrayC[_i2].price * _array3[_i2]);
+				}
+				newstate.cartTotalItem = _totalEach2;
+				newstate.cartTotal = _total2;
 				return newstate;
 			}
 		//clear cart
@@ -45256,6 +45272,7 @@ var state_update = function state_update() {
 				newstate.cartQuant = _array4;
 				newstate.cartItems = 0;
 				newstate.cartTotal = 0;
+				newstate.cartTotalItem = _array4;
 				return newstate;
 			}
 		default:

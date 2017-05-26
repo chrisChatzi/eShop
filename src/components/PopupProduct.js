@@ -295,21 +295,21 @@ const PopupProduct = ( {
 				Διαστάσεις
 			</div>
 			<div className={(state.dimensionsCheck) ? "valueError right pop" : "right pop" }>
-				<div className="rows">
+				<div className="rows pop">
 					<img src="../img/general/top1.png" />
 					<img src="../img/general/top2.png" />
 					<img src="../img/general/top3.png" />
 				</div>
-				<div className="rows">
+				<div className="rows pop">
 					<img src="../img/general/p1.png" />
 					<img src="../img/general/p2.png" />
 					<img src="../img/general/p3.png" />
 					<img src="../img/general/p4.png" />
 				</div>
 				{state.dims.map( (v,i) => 
-					<div className="size" key={i}>
-						<div className="size-head">{state.size[i]}</div>
-						<div className="size-main">
+					<div className="size pop" key={i}>
+						<div className="size-head pop">{state.size[i]}</div>
+						<div className="size-main pop">
 						A: <input defaultValue={(data && state.size[i]) ? item.dims[i][state.size[i]][0] : 0 } 
 							className="small pop" onChange={(e) => changeDims(e, state.size[i], 0) } />
 						B: <input defaultValue={(data && state.size[i]) ? item.dims[i][state.size[i]][1] : 0 } 

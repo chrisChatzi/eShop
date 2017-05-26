@@ -664,6 +664,7 @@ button {
     right: 59px;
     width: auto;
     height: auto;
+    height: 90px;
     padding: 5px 0;
     width: 100px;
     border: 1px solid #ccc;
@@ -716,8 +717,12 @@ button {
       margin-left: -125px;
       cursor: pointer;
       font-size: 22px;
-      background: #213132;
-      color: #fff; }
+      /*background: $headerMain;*/
+      /*color: #fff;*/ }
+      .header .headerMain .mid img {
+        padding: 10px;
+        height: 90%;
+        width: auto; }
     .header .headerMain .right {
       float: right; }
       .header .headerMain .right .item {

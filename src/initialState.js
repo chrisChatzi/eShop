@@ -50,7 +50,8 @@ let main = {
 	cart : [],
 	cartSizes : [],
 	cartColors : [],
-	cartQuant : [],
+	cartQuant : [],			//holds the quantity of each item in the cart
+	cartTotalItem : [],		//holds the total cost for each item in the cart
 	cartItems : 0,
 	cartTotal : 0,
 	showCart : false

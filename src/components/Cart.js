@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const Cart = ( { state, cart, cartSizes, cartColors, cartQuant, cartTotal, lang, langIdx, 
+const Cart = ( { state, cart, cartSizes, cartColors, cartQuant, cartTotal, cartTotalItem, lang, langIdx, 
 				checkout, changeQuant, deleteItem } ) => (
 	<div id="cartBody" className="cart">
 		<div className="head">{lang.cart}</div>
@@ -26,7 +26,7 @@ const Cart = ( { state, cart, cartSizes, cartColors, cartQuant, cartTotal, lang,
 					<div className="delete" onClick={()=>deleteItem(i)}>
 						<i className="fa fa-trash"></i>
 					</div>
-					<div className="total">{state.totalItem[i]} &euro;</div>
+					<div className="total">{cartTotalItem[i]} &euro;</div>
 				</div>
 				)}
 			</div>

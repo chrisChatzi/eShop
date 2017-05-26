@@ -15,6 +15,7 @@ function mapStateToProps(state, ownProps) {
 		cartColors: state.main.cartColors,
 		cartQuant: state.main.cartQuant,
 		cartTotal: state.main.cartTotal,
+		cartTotalItem: state.main.cartTotalItem,
 		lang : state.main.lang,
 		langIdx : state.main.langIdx
 	};
@@ -87,14 +88,14 @@ class Cart extends Component {
 	}
 
 	render() {
-		let { cart, cartSizes, cartColors, cartQuant, cartTotal, lang, langIdx } = this.props
+		let { cart, cartSizes, cartColors, cartQuant, cartTotal, cartTotalItem, lang, langIdx } = this.props
 		let { changeQuant, deleteItem, checkout } = this
 
 		return (
 			<div className="">
 				<CartC state={this.state} checkout={checkout}
 					cart={cart} cartSizes={cartSizes} cartColors={cartColors} cartQuant={cartQuant}
-					cartTotal={cartTotal}
+					cartTotal={cartTotal} cartTotalItem={cartTotalItem}
 					changeQuant={changeQuant} deleteItem={deleteItem}
 					lang={lang} langIdx={langIdx} />
 			</div>
